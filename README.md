@@ -1,4 +1,4 @@
-# Neural Network Training Coursework
+# Shallow Neural Network Training Coursework
 
 Evaluating a neural network using the MatLab `cancer_dataset`.
 
