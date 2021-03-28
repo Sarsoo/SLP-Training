@@ -184,6 +184,21 @@ University of Surrey
 
 \end_layout
 
+\begin_layout Section*
+Executive Summary
+\end_layout
+
+\begin_layout Standard
+Summary here
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -237,15 +252,6 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand lstlistoflistings
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -285,6 +291,26 @@ setcounter{page}{1}
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Section
+Hidden Nodes & Epochs (Exp 1)
+\end_layout
+
+\begin_layout Section
+Ensemble Classification (Exp 2)
+\end_layout
+
+\begin_layout Section
+Optimiser Comparisons (Exp 3)
+\end_layout
+
+\begin_layout Section
+Overlapping 2D Gaussians (Exp 4)
+\end_layout
+
+\begin_layout Section
+Conclusions
 \end_layout
 
 \begin_layout Standard
