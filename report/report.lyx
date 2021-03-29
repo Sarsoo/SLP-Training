@@ -120,7 +120,7 @@ todonotes
 \begin_layout Title
 
 \size giant
-Training Neural Networks With Backpropagation
+Training Neural Networks with Backpropagation
 \end_layout
 
 \begin_layout Author
@@ -252,7 +252,7 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -342,6 +342,17 @@ options "bibtotoc"
 \begin_layout Section
 \start_of_appendix
 Source Code
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "../nncw.py"
+lstparams "caption={Formatted Jupyter notebook containing experiment code},label={notebook-code}"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
