@@ -24,7 +24,7 @@ minimalistic
 todonotes
 \end_modules
 \maintain_unincluded_children false
-\language english
+\language british
 \language_package default
 \inputencoding utf8
 \fontencoding global
@@ -100,7 +100,7 @@ todonotes
 \defskip medskip
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style english
+\quotes_style british
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
@@ -293,16 +293,221 @@ setcounter{page}{1}
 Introduction
 \end_layout
 
+\begin_layout Standard
+Artificial neural networks have been the object of research and investigation
+ since the 1940s with 
+\noun on
+McCulloch
+\noun default
+ and 
+\noun on
+Pitts
+\noun default
+' model of the artificial neuron
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McCulloch1943"
+literal "false"
+
+\end_inset
+
+ or 
+\emph on
+Threshold Logic Unit
+\emph default
+.
+ Throughout the century, the development of the single and multi-layer perceptro
+ns (SLP/MLP) alongside the backpropagation algorithm
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rumelhart1986"
+literal "false"
+
+\end_inset
+
+ advanced the study of artificial intelligence.
+ Throughout the 2010s, convolutional neural networks have proved critical
+ in the field of computer vision and image recognition
+\begin_inset CommandInset citation
+LatexCommand cite
+key "alexnet"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This work investigates the ability of a shallow multi-layer perceptron to
+ classify breast tumours as either benign or malignant.
+ The architecture and parameters were varied before exploring how in order
+ to evaluate how this affects performance.
+ 
+\end_layout
+
+\begin_layout Standard
+Investigations were carried out in 
+\noun on
+Python
+\noun default
+ using the 
+\noun on
+TensorFlow
+\noun default
+ package to construct, train and evaluate neural networks.
+ The networks were trained using a supervised learning curriculum of labelled
+ data taken from a standard 
+\noun on
+MatLab
+\noun default
+ dataset
+\begin_inset CommandInset citation
+LatexCommand cite
+key "matlab-dataset"
+literal "false"
+
+\end_inset
+
+ from the 
+\noun on
+Deep Learning Toolbox
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:exp1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ investigates the effect of varying the number of hidden nodes on test accuracy
+ along with the number of epochs that the MLPs are trained for.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:exp2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ builds on the previous experiment by using reasonable parameter values
+ to investigate performance when using an ensemble of models to classify
+ in conjunction.
+ The effect of varying the number of nodes and epochs throughout the ensemble
+ was considered in order to determine whether combining multiple models
+ could produce a better accuracy than those individually.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:exp3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ investigates the effect of altering how the networks learn by changing
+ the optimisation algorithm.
+ Two additional algorithms to the previously used are considered and compared
+ using the same test apparatus of section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:exp2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Hidden Nodes & Epochs (Exp 1)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:exp1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This section investigates the effect of varying the number of hidden nodes
+ in a single hidden layer of a multi-layer perceptron.
+ This is compared to the effect of varying 
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Subsection
+Discussion
 \end_layout
 
 \begin_layout Section
 Ensemble Classification (Exp 2)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:exp2"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Subsection
+Discussion
 \end_layout
 
 \begin_layout Section
 Optimiser Comparisons (Exp 3)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:exp3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Optimisers
+\end_layout
+
+\begin_layout Subsubsection
+Stochastic Gradient Descent
+\end_layout
+
+\begin_layout Subsubsection
+RMSprop
+\end_layout
+
+\begin_layout Subsubsection
+Adam
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Subsection
+Discussion
 \end_layout
 
 \begin_layout Section
