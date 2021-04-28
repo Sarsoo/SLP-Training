@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "shallow-training"
+version = "0.1.0"
+description = ""
+authors = ["andy <andy@sarsoo.xyz>"]
+
+[tool.poetry.dependencies]
+python = "3.8"
+tensorflow = "^2.4.1"
+pandas = "^1.2.4"
+matplotlib = "^3.4.1"
+seaborn = "^0.11.1"
+scikit-learn = "^0.24.1"
+jupyterlab = "^3.0.14"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
