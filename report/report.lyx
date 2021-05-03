@@ -341,8 +341,8 @@ literal "false"
 \begin_layout Standard
 This work investigates the ability of a shallow multi-layer perceptron to
  classify breast tumours as either benign or malignant.
- The architecture and parameters were varied before exploring how in order
- to evaluate how this affects performance.
+ The architecture and parameters were varied before exploring how the combinatio
+n of classifiers can affect performance.
  
 \end_layout
 
@@ -356,6 +356,22 @@ Python
 TensorFlow
 \noun default
  package to construct, train and evaluate neural networks.
+ A 
+\noun on
+Jupyter
+\noun default
+ notebook containing the experiments and the evaluated parameters can be
+ seen formatted as a single script in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Source-Code"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  The networks were trained using a supervised learning curriculum of labelled
  data taken from a standard 
 \noun on
@@ -373,6 +389,33 @@ literal "false"
 \noun on
 Deep Learning Toolbox
 \noun default
+.
+ For this binary-classification problem there are two formats for the network,
+ a single output node (threshold of 0.5 to differentiate classes) or two
+ output nodes to create a one-hot vector.
+ As the labels were formatted as one-hot vectors, two output nodes with
+ a softmax activation function were used.
+ The number of parameters associated with the employed architectures of
+ varying hdiden nodes can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "app:Network-Parameter-Counts"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ while a graph of the constructed network can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Network-Graph"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
 \end_layout
 
@@ -443,14 +486,27 @@ name "sec:exp1"
 \end_layout
 
 \begin_layout Standard
-This section investigates the effect of varying the number of nodes in the
- single hidden layer of a shallow multi-layer perceptron.
+This section investigates the effect of varying the number of hidden nodes,
+ 
+\begin_inset Formula $n_{h}$
+\end_inset
+
+, in the single hidden layer of a shallow multi-layer perceptron.
  This is compared to the effect of training the model with different numbers
  of epochs.
  Throughout the experiment, stochastic gradient descent with momentum is
  used as the optimiser, variations in both momentum and learning rate are
  presented.
+ The learning rate and momentum coefficient used during training are denoted
  
+\begin_inset Formula $\eta$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ respectively.
 \end_layout
 
 \begin_layout Subsection
@@ -466,10 +522,143 @@ status open
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
-	filename ../graphs/exp1-test1-error-rate-curves.png
+	filename ../graphs/exp1-test2-14-error-rate-curves.png
 	lyxscale 50
-	width 50col%
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.05$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-14"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-12-error-rate-curves.png
+	lyxscale 50
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-12"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-13-error-rate-curves.png
+	lyxscale 50
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.5$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-13"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -482,17 +671,17 @@ status open
 \begin_layout Plain Layout
 Varied hidden node performance results over varied training lengths for
  
-\begin_inset Formula $\eta=0.01$
+\begin_inset Formula $\eta=0.05,0.1,0.5$
 \end_inset
 
 , 
-\begin_inset Formula $p=0$
+\begin_inset Formula $\beta=0$
 \end_inset
 
 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:exp1-test1"
+name "fig:exp1-test2-12,14"
 
 \end_inset
 
@@ -517,32 +706,246 @@ name "fig:exp1-test1"
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:exp1-test1"
+reference "fig:exp1-test2-12,14"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- visualises the performance of hidden nodes up to 256 over training periods
- up to 200 epochs in length.
+ visualises the test performance of hidden nodes up to 
+\begin_inset Formula $n_{h}=128$
+\end_inset
+
+ over training periods up to 100 epochs in length.
  In general, the error rate can be seen to decrease when the models are
  trained for longer.
- Increasing the number of nodes decreases the error rate and increases the
- gradient with which it falls up to a limit.
- 64, 128 and 256 hidden nodes lie close together as the increases in performance
- slow.
- Between 0 and 25 epochs, the error rate throughout for any number of nodes
- can descend little below 0.35.
- The number of epochs to overcome this plateau is different for each number
- of nodes.
+ Increasing 
+\begin_inset Formula $n_{h}$
+\end_inset
+
+ decreases the error rate and increases the gradient with which it falls
+ to a minimum limit.
+ As the learning rate increases, the speed with which the network converges
+ increases.
+ For 
+\begin_inset Formula $\eta=0.05$
+\end_inset
+
+, networks with large 
+\begin_inset Formula $n_{h}$
+\end_inset
+
+ begin converging after 30 epochs.
+ This is after only 15 epochs for 
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+ and almost immediately for 
+\begin_inset Formula $\eta=0.5$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-14-error-rate-std.png
+	lyxscale 50
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.05$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-14-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-12-error-rate-std.png
+	lyxscale 50
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-12-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-13-error-rate-std.png
+	lyxscale 50
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.5$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-13-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Varied hidden node performance standard deviation results over varied training
+ lengths for 
+\begin_inset Formula $\eta=0.05,0.1,0.5$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+, note the larger 
+\begin_inset Formula $y$
+\end_inset
+
+ scale for 
+\begin_inset Formula $\eta=0.5$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-12,14-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 The standard deviations for the above discussed results of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:exp1-test1"
+reference "fig:exp1-test2-12,14"
 plural "false"
 caps "false"
 noprefix "false"
@@ -552,7 +955,7 @@ noprefix "false"
  can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:exp1-test1-std"
+reference "fig:exp1-test2-12,14-std"
 plural "false"
 caps "false"
 noprefix "false"
@@ -560,80 +963,104 @@ noprefix "false"
 \end_inset
 
 .
- As the network starts training, the standard deviation decreases to a minimum
- between 
-\begin_inset Formula $10-20$
+ In general, prior to the networks beginning to converge the standard deviation
+ is close to 0.
+ As previously described, this takes place at lower epochs for higher learning
+ rates.
+ Once the networks start converging, the standard deviation of the test
+ error rate increases.
+ Increasing the learning rate also increases the variance in test error
+ rates, the max value for 
+\begin_inset Formula $\eta=0.5$
 \end_inset
 
- epochs before increasing to a peak at 64.
- As the number of hidden nodes increases, the standard deviation decreases.
- The initial drop is sharper and the 64 epoch peak increases higher.
- 
+ is double that of the lower 
+\begin_inset Formula $\eta$
+\end_inset
+
+ experiments within the first 20 epochs.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\begin_inset Flex TODO Note (inline)
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename /mnt/files/dev/py/shallow-training/graphs/exp1-test1-test-train-error-rate-std.png
-	lyxscale 50
-	width 60col%
+more std stuff and test/train splits
+\end_layout
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Standard deviation of results from figure 
+\begin_layout Standard
+The effect of varying momentum can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:exp1-test1"
+reference "fig:exp1-momentums"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- with 
+, a fixed learning rate of 
 \begin_inset Formula $\eta=0.01$
 \end_inset
 
-, 
-\begin_inset Formula $p=0$
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:exp1-test1-std"
-
-\end_inset
-
-
-\end_layout
+ was maintained throughout.
+ The meaning of momentum and its effect on training is discussed in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Stochastic-Gradient-Descent"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
+.
+ Without momentum (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp1-test2-11"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
+), it can be seen that the network does not begin to converge within 100
+ epochs.
+ This is also the case for 
+\begin_inset Formula $\beta=0.3$
+\end_inset
 
+, it is only by 
+\begin_inset Formula $\beta=0.5$
+\end_inset
+
+ that some of the evaluated architectures begin to converge.
+ The test error rates for the 32 and 64 node series' begin to decrease after
+ 64 epochs with 
+\begin_inset Formula $n_{h}=64$
+\end_inset
+
+ nodes descending faster.
+ With 
+\begin_inset Formula $\beta=0.7$
+\end_inset
+
+, the 32 and 64-node networks begin to converge earlier, after 32 epochs
+ while the remaining architectures down to 2 nodes begin to converge after
+ 64 epochs.
+ Finally, with 
+\begin_inset Formula $\beta=0.7$
+\end_inset
+
+, all of the evaluated architectures have convered by 64 epochs.
 \end_layout
 
 \begin_layout Standard
@@ -645,10 +1072,18 @@ status open
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
-	filename /mnt/files/dev/py/shallow-training/graphs/exp1-test2-2-error-rate-curves.png
+	filename ../graphs/exp1-test2-7-error-rate-curves.png
 	lyxscale 50
-	width 50col%
+	width 45col%
 
 \end_inset
 
@@ -659,19 +1094,240 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Varied hidden node performance results over varied training lengths for
- 
-\begin_inset Formula $\eta=0.1$
+\begin_inset Formula $\eta=0.01$
 \end_inset
 
 , 
-\begin_inset Formula $p=0$
+\begin_inset Formula $\beta=0.9$
 \end_inset
 
 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:exp1-test2-2"
+name "fig:exp1-test2-7"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-10-error-rate-curves.png
+	lyxscale 50
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.01$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.7$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-10"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-8-error-rate-curves.png
+	lyxscale 50
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.01$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.5$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-8-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-9-error-rate-curves.png
+	lyxscale 50
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.01$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.3$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-11-error-rate-curves.png
+	lyxscale 50
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta=0.01$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-11"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Varied hidden node performance results over varied training length with
+ different momentum coefficients
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-momentums"
 
 \end_inset
 
@@ -690,6 +1346,20 @@ name "fig:exp1-test2-2"
 
 \begin_layout Subsection
 Discussion
+\end_layout
+
+\begin_layout Standard
+From the presented results, it can be seen that, generally, increasing either
+ learning rate or momentum increases the speed of convergence.
+\end_layout
+
+\begin_layout Standard
+Increasing the number of hidden nodes also increases the speed of convergence.
+ However, it is worth noting that a large number of nodes is not required
+ to achieve a highly performant accuracy.
+ A single hidden node for a total of 14 parameters, with enough training,
+ was able to achieve similar results to a 64-node network of 770 or 5 times
+ as many parameters.
 \end_layout
 
 \begin_layout Section
@@ -711,9 +1381,12 @@ A horizontal ensemble of
  models was constructed with majority vote in order to investigate whether
  this could improve performance over that of any single model.
  In order to introduce variation between models of the ensemble, a range
- for hidden nodes and epochs could be defined.
- When selecting parameters throughout the ensemble, the models are equally
- distributed throughout the ranges
+ of hidden nodes and/or epochs could be defined.
+ When selecting parameters throughout the ensemble, 
+\begin_inset Formula $m$
+\end_inset
+
+ equally spaced values within the range are selected
 \begin_inset Foot
 status open
 
@@ -728,7 +1401,6 @@ For
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -744,32 +1416,26 @@ agreement
  correctly predict a sample's class when the ensemble correctly classifies.
  It could also be considered the confidence of the meta-classifier, for
  one horizontal model 
-\begin_inset Formula $a_{m=1}=1$
+\begin_inset Formula $a_{m=1}\equiv1$
 \end_inset
 
 .
- As error rates are presented, this is inverted by 
-\begin_inset Formula $1-a$
+ As error rates are presented as opposed to accuracy, this is inverted by
+ 
+\begin_inset Formula $d=1-a$
 \end_inset
 
  to 
 \emph on
 disagreement
 \emph default
-, 
-\begin_inset Formula $d$
-\end_inset
-
 , the proportion of incorrect models when correctly group classifying.
+ Alongside the disagreement and ensemble test accuracy, the average individual
+ accuracy for both test and training data are also presented.
 \end_layout
 
 \begin_layout Subsection
 Results
-\end_layout
-
-\begin_layout Standard
-For comparison, the average individual accuracy for both test and training
- data are presented.
 \end_layout
 
 \begin_layout Standard
@@ -800,10 +1466,18 @@ Ensemble classifier performance results for
 \end_inset
 
 , 
-\begin_inset Formula $p=0.01$
+\begin_inset Formula $\beta=0.01$
 \end_inset
 
-, nodes = 1 - 400, epochs = 5 - 100
+, nodes = 
+\begin_inset Formula $1-400$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $5-100$
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:exp2-test8"
@@ -882,7 +1556,7 @@ Ensemble classifier performance results for
 \end_inset
 
 , 
-\begin_inset Formula $p=0.01$
+\begin_inset Formula $\beta=0.01$
 \end_inset
 
 , nodes = 
@@ -931,7 +1605,10 @@ noprefix "false"
 , 3 horizontal models was shown to be the worst performing configuration
  with lower ensemble accuracy and higher disagreement.
  This is likely due to larger proportion that a single model constitutes.
- 
+ When correct, three models may only have a disagreement of 1/3 or 0 and
+ thus the final value will lie somewhere between these two.
+ As the number of horiztonal models increases, the number of acceptable
+ disagreement values increases.
 \end_layout
 
 \begin_layout Section
@@ -965,22 +1642,684 @@ Optimisers
 
 \begin_layout Subsubsection
 Stochastic Gradient Descent
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Stochastic-Gradient-Descent"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Gradient descent and the closely related stochastic and mini-batch gradient
+ descent are popular optimisation algorithms in the machine learning space.
+\end_layout
+
+\begin_layout Standard
+The aim of the neural networks in question are to make correct classifications
+ on sample data being fed-forward, ideally the networks classification would
+ be equal to the provided label.
+ A loss function, 
+\begin_inset Formula $J$
+\end_inset
+
+, is defined as the difference between the predicted ouput and the target
+ labelled output
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+There are many different options for the loss function including mean squared
+ error and categorical cross-entropy.
+ Although they have significant differences, this coverage of optimisation
+ algorithms does not rely on a specific loss function.
+\end_layout
+
+\end_inset
+
+, it follows that we are aiming to minimise this as much as possible.
+ In order to improve the network, the values of the parameters, 
+\begin_inset Formula $\theta$
+\end_inset
+
+, must be changed with the intention of reducing the loss value.
+ From a set of starting weights, 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+, this could be completed by finding the gradient of 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $J$
+\end_inset
+
+ w.r.t
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
+ Formally this would be 
+\begin_inset Formula $\nabla_{\theta_{0}}J\left(\theta_{0}\right)$
+\end_inset
+
+, the first derivative of the loss function with respect to the current
+ weights.
+ In order to reduce the loss, the gradient should be subtracted from the
+ current weight, a scale factor, 
+\begin_inset Formula $\eta$
+\end_inset
+
+, or the learning rate is defined to apply a tuneable proportion of the
+ gradient to the starting values.
+\end_layout
+
+\begin_layout Standard
+In order to iteratively apply this algorithm, the form below is used for
+ time steps, 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\theta_{t+1}=\theta_{t}-\eta\cdot\nabla_{\theta_{t}}J\left(\theta_{t}\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The differences between standard or batch gradient descent and the previously
+ mentioned variants is how many samples are fed-forward as part of the optimisat
+ion algorithm.
+ Standard gradient descent propagates and calculates weight changes for
+ the entire training dataset in a single iteration of the algorithm.
+ Stochastic gradient descent, instead, processes only one sample during
+ an iteration.
+ Mini-batch strikes a balance between the two, the speed of stochastic gradient
+ descent is retained as more weight updates are made, however the path through
+ the error surface can be noisier than vanilla gradient descent.
+ Therefore, although the algorithm is colloquially referred to as gradient
+ descent or SGD, more strictly as a batch size of 35 was used for this work,
+ mini-batch gradient descent is being used.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+Tensorflow's
+\noun default
+ implementation of SGD also includses a momentum parameter.
+ Momentum aims to help a network increase the speed of convergence and reduce
+ oscillations by reinforcing dimensions (weights) that are changing in a
+ consistent direction while slowing dimensions that are changing direction
+ rapidly 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "paperspace-mom-rmsprop-adam"
+literal "false"
+
+\end_inset
+
+.
+ Momentum introduces a memory element to the descent by including a portion,
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+, of the previous step's weight delta or 
+\emph on
+velocity
+\emph default
+ in subsequent iterations.
+\end_layout
+
+\begin_layout Standard
+The introduction of momentum can be described as below 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "tf.keras.optimizers.SGD"
+literal "false"
+
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+v_{t}=\beta\cdot v_{t-1}-\eta\cdot\nabla_{\theta_{t}}J\left(\theta_{t}\right)\label{eq:sgd-momentum}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\theta_{t+1}=\theta_{t}+v_{t}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As previously presented (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp1-momentums"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), momentum can significantly increase convergence speed.
 \end_layout
 
 \begin_layout Subsubsection
 RMSprop
 \end_layout
 
+\begin_layout Standard
+Although gradient descent is a powerful optimisation algorithm, there are
+ drawbacks.
+ One limitation is that the learning rate, 
+\begin_inset Formula $\eta$
+\end_inset
+
+, is a scalar applied to all gradients.
+ As a result, smaller gradients as would be found at saddle points move
+ slowly.
+ An alternative would be to expand the single scalar to a learning rate
+ per parameter that could move dynamically throughout the training process,
+ known as adaptive learning rate optimisation.
+ 
+\end_layout
+
+\begin_layout Standard
+One such algorithm is RMSprop 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rmsprop-hinton"
+literal "false"
+
+\end_inset
+
+ or 
+\emph on
+root mean square propagation
+\emph default
+, an unpublished algorithm that builds on previous adaptive algorithms such
+ as Rprop and Adagrad.
+ These aimed to overcome the shortcomings of SGD by using just the sign
+ of the calculated gradients and allowing the learning rate alone to define
+ the size of the step.
+ Instead of a constant or defined learning rate schedule, each learning
+ rate 
+\emph on
+floats
+\emph default
+ and is scaled up or down based on whether it is consistently changing in
+ the same direction each iteration.
+\end_layout
+
+\begin_layout Standard
+Equations for RMSprop can be seen below 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "understanding-rmsprop"
+literal "false"
+
+\end_inset
+
+.
+ For conciseness, the previously defined derivative of the loss function
+ w.r.t to the current parameters is shortened, 
+\begin_inset Formula $g_{t}=\nabla_{\theta_{t}}J\left(\theta_{t}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E\left[g^{2}\right]_{t}=\alpha\cdot E\left[g^{2}\right]_{t-1}+\left(1-\alpha\right)\cdot g_{t}^{2}\label{eq:rmsprop-expected-value}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{E\left[g^{2}\right]_{t}+\epsilon}}g_{t}\label{eq:rmsprop-update}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As previously mentioned, only the sign of the gradient is used, this can
+ be achieved by dividing 
+\begin_inset Formula $g$
+\end_inset
+
+ by the magnitude 
+\begin_inset Formula $|g|$
+\end_inset
+
+.
+ RMSprop extends this by instead dividing by the exponential average of
+ squared gradients, equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rmsprop-expected-value"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In this equation, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ constitutes the gradient decay rate, a value of 0.9 is suggested 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "understanding-rmsprop"
+literal "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is a small constant on the order of 
+\begin_inset Formula $1\times10^{-7}$
+\end_inset
+
+ that stops the algorithm from dividing by 0.
+\end_layout
+
 \begin_layout Subsubsection
 Adam
+\end_layout
+
+\begin_layout Standard
+Adam or 
+\emph on
+adaptive moment estimation
+\emph default
+ is an optimisation algorithm that combines the adaptive learning rates
+ of RMSprop with the previously described momentum 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "adam-paper"
+literal "false"
+
+\end_inset
+
+.
+ Like RMSprop, the exponential average of squared gradients is maintained,
+ compare equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rmsprop-expected-value"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:adam-squared-grad-accum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ In addition to this, however, the exponential average of gradients is maintaine
+d with a similar function to momentum, compare equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sgd-momentum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:adam-momentum"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+m_{t}=\beta_{1}\cdot m_{t-1}+\left(1-\beta_{1}\right)g_{t}\label{eq:adam-momentum}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+v_{t}=\beta_{2}\cdot v_{t-1}+\left(1-\beta_{2}\right)g_{t}^{2}\label{eq:adam-squared-grad-accum}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These two equations constitute the eponymous moments, 
+\begin_inset Formula $m_{t}$
+\end_inset
+
+ is the first moment or mean while 
+\begin_inset Formula $v_{t}$
+\end_inset
+
+ is the second moment or the uncentered variance of the gradients.
+ As these moments are initialised at zero, these estimations tend to bias
+ towards 0.
+ The original authors correct the bias using the below 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "adam-paper"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{m}_{t}=\frac{m_{t}}{1-\beta_{1}^{t}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{v}_{t}=\frac{v_{t}}{1-\beta_{2}^{t}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This leaves the update step itself, described below.
+ Similarities can be seen between the previous RMSprop update step (equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rmsprop-update"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and that of Adam.
+ The RMSprop momentum term 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $E\left[g^{2}\right]_{t}$
+\end_inset
+
+ has been replaced by the equivalent 
+\begin_inset Formula $v_{t}$
+\end_inset
+
+ while the calculated gradient, 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ has been replaced by the exponentially decaying average gradient, 
+\begin_inset Formula $m_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{\hat{v}_{t}+\epsilon}}\hat{m}_{t}\label{eq:adam-update}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Results
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/andy/dev/py/shallow-training/graphs/exp3-test1-error-rate-curves.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ensemble classifier performance results for SGD, RMSprop and Adam optimisation
+ with 
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+, nodes = 16, epochs = 
+\begin_inset Formula $1-100$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/andy/dev/py/shallow-training/graphs/exp3-test7-error-rate-curves.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ensemble classifier performance results for SGD, RMSprop and Adam optimisation
+ with 
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.9$
+\end_inset
+
+, nodes = 
+\begin_inset Formula $1-400$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $50-100$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test7"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Discussion
+\end_layout
+
+\begin_layout Standard
+In suggesting a optimal algorithm it is worth considering the intended domains
+ for RMSprop and Adam.
+ As newer algorithms, there tends to a focus on deep convolutional networks
+ which implies a somewhat different set of requirements.
+ This is not to say that the algorithms are inappropriate for the presented
+ applications, as demonstrated, these more complex algorithms were able
+ to outperform the employed gradient descent with optional momentum.
 \end_layout
 
 \begin_layout Section
@@ -1015,7 +2354,256 @@ options "bibtotoc"
 
 \begin_layout Section
 \start_of_appendix
+Network Parameter Counts
+\begin_inset CommandInset label
+LatexCommand label
+name "app:Network-Parameter-Counts"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hidden Nodes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Trainable Parameters
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+26
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+98
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+194
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+386
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+770
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+128
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,538
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Number of trainable parameters for architectures of varying numbers of hidden
+ nodes
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:trainable-params"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Source Code
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Source-Code"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1023,6 +2611,65 @@ Source Code
 LatexCommand lstinputlisting
 filename "../nncw.py"
 lstparams "caption={Formatted Jupyter notebook containing experiment code},label={notebook-code}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Network Graph
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Network-Graph"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/tensorboard-graph.png
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Single hidden layer neural network as graphed by 
+\noun on
+Tensorboard
+\noun default
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tensorboard"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 

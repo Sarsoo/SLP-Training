@@ -5,7 +5,7 @@ description = ""
 authors = ["andy <andy@sarsoo.xyz>"]
 
 [tool.poetry.dependencies]
-python = "3.8"
+python = "~3.8"
 tensorflow = "^2.4.1"
 pandas = "^1.2.4"
 matplotlib = "^3.4.1"
