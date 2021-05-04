@@ -46,7 +46,7 @@ todonotes
 \bibtex_command biber
 \index_command default
 \paperfontsize default
-\spacing onehalf
+\spacing other 1.2
 \use_hyperref true
 \pdf_title "Training Neural Networks With Backpropagation"
 \pdf_author "Andy Pack"
@@ -189,7 +189,63 @@ Executive Summary
 \end_layout
 
 \begin_layout Standard
-Summary here
+Investigations into the accuracy of a shallow multi-layer perceptron at
+ classifying breast tumours as either benign or malignant are presented.
+ 
+\noun on
+Python
+\noun default
+ and the 
+\noun on
+TensorFlow
+\noun default
+ platform were used to construct and evaluate networks of varied architectures
+ and training periods.
+\end_layout
+
+\begin_layout Standard
+For experiment 1, the effect of varying the number of hidden nodes was contraste
+d with a varied number of training epochs.
+ As the number of hidden nodes was increased from 1 to 64, the speed of
+ convergence increased.
+ The final performance once converged, however, was not significantly affected
+ by the size of the hidden layer at around a 4% error rate.
+ Different learning rates and momentum were selected in order to visualise
+ the effect of these parameters on error rate.
+ A larger learning rate was shown to increase the speed of convergence while
+ also increasing the variance in the results.
+\end_layout
+
+\begin_layout Standard
+Experiment 2 builds on the previous work by creating a horizontal ensemble
+ classifier of models that use majority vote for consensus.
+ In order to vary the models so as to make a more robust classification,
+ variations were introduced to the parameters of the models.
+ These variations could be made either linearly, with equally spaced parameter
+ values within a range, or by randomly selecting values from the range.
+ For uniform ensembles, the combined classification error rate was fairly
+ consistent throughout the tested group sizes with a variance in results
+ that decreased as the size of the meta-classifier was increased.
+ For random ensembles, groups of less than 5 models showed both slightly
+ higher error rates and significantly larger variance.
+ By increasing the size of the ensemble, better accuracy with tighter variance
+ was achieved.
+ A random ensemble was recommended in order to better sample the allowed
+ parameter combinations assuming a larger ensemble is employed.
+\end_layout
+
+\begin_layout Standard
+Experiment 3 repeats the test apparatus of experiment 2 with variations
+ in the employed optimisation algorithm.
+ The RMSprop and Adam algorithms are described in order to present the differenc
+es to the previously used stochastic gradient descent.
+ Throughout the evaluated ensemble sizes and algorithms, the group error
+ rate was comparable indicating that the use of a meta-classifier was able
+ to overcome the drawbacks of each.
+ Due to the similar accuracy, a recommendation for RMSprop was made as a
+ result of its reduced variance for the reported results indicating a higher
+ robustness for the parameters employed.
+ For the healthcare domain of the 
 \end_layout
 
 \begin_layout Standard
@@ -213,10 +269,6 @@ pagenumbering{roman}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Abstract
-abstract
 \end_layout
 
 \begin_layout Standard
@@ -303,7 +355,7 @@ McCulloch
 \noun on
 Pitts
 \noun default
-' model of the artificial neuron
+' model of the artificial neuron 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "McCulloch1943"
@@ -317,7 +369,7 @@ Threshold Logic Unit
 \emph default
 .
  Throughout the century, the development of the single and multi-layer perceptro
-ns (SLP/MLP) alongside the backpropagation algorithm
+ns (SLP/MLP) alongside the backpropagation algorithm 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rumelhart1986"
@@ -327,7 +379,7 @@ literal "false"
 
  advanced the study of artificial intelligence.
  Throughout the 2010s, convolutional neural networks have proved critical
- in the field of computer vision and image recognition
+ in the field of computer vision and image recognition 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "alexnet"
@@ -377,7 +429,7 @@ noprefix "false"
 \noun on
 MatLab
 \noun default
- dataset
+ dataset 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "matlab-dataset"
@@ -396,7 +448,7 @@ Deep Learning Toolbox
  As the labels were formatted as one-hot vectors, two output nodes with
  a softmax activation function were used.
  The number of parameters associated with the employed architectures of
- varying hdiden nodes can be seen in appendix 
+ varying hidden nodes can be seen in appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "app:Network-Parameter-Counts"
@@ -725,7 +777,7 @@ noprefix "false"
 \end_inset
 
  decreases the error rate and increases the gradient with which it falls
- to a minimum limit.
+ to a minimum limit of ~4%.
  As the learning rate increases, the speed with which the network converges
  increases.
  For 
@@ -982,11 +1034,153 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
+The results from figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp1-test2-13"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp1-test2-13-std"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be seen repeated in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp1-test2-13-individual"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ separately to include train error rates along with the previously reported
+ test performance.
+ In general the test and train accuracy can be seen to be very similar with
+ little difference.
+ While at 10 epochs the train and test accuracies are effectively equal,
+ by 100 epochs the test error rate has slightly increased from the training
+ value.
+ Additionally, at low epochs and high node counts, the variance in test
+ error rate is significantly higher than the training error rate.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-more std stuff and test/train splits
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-13-test-train-error-rate.png
+	lyxscale 20
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Error rates across nodes over epochs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp1-test2-13-test-train-error-rate-std.png
+	lyxscale 20
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Standard deviations across nodes over epochs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Test and train results for 
+\begin_inset Formula $\eta=0.5$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp1-test2-13-individual"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1060,7 +1254,7 @@ noprefix "false"
 \begin_inset Formula $\beta=0.7$
 \end_inset
 
-, all of the evaluated architectures have convered by 64 epochs.
+, all of the evaluated architectures have converged by 64 epochs.
 \end_layout
 
 \begin_layout Standard
@@ -1351,6 +1545,8 @@ Discussion
 \begin_layout Standard
 From the presented results, it can be seen that, generally, increasing either
  learning rate or momentum increases the speed of convergence.
+ Increasing the learning rate makes convergence faster as the steps taken
+ by the weights set across the error surface are larger.
 \end_layout
 
 \begin_layout Standard
@@ -1360,6 +1556,12 @@ Increasing the number of hidden nodes also increases the speed of convergence.
  A single hidden node for a total of 14 parameters, with enough training,
  was able to achieve similar results to a 64-node network of 770 or 5 times
  as many parameters.
+\end_layout
+
+\begin_layout Standard
+From the test/train comparisons, the slight divergence of test error rates
+ from training error would suggest that the network is overfitting to the
+ training data, reducing its ability to generalise.
 \end_layout
 
 \begin_layout Section
@@ -1381,12 +1583,12 @@ A horizontal ensemble of
  models was constructed with majority vote in order to investigate whether
  this could improve performance over that of any single model.
  In order to introduce variation between models of the ensemble, a range
- of hidden nodes and/or epochs could be defined.
- When selecting parameters throughout the ensemble, 
+ of hidden nodes, learning rate and/or epochs could be defined.
+ When selecting parameters throughout the ensemble, either 
 \begin_inset Formula $m$
 \end_inset
 
- equally spaced values within the range are selected
+ equally spaced values 
 \begin_inset Foot
 status open
 
@@ -1400,7 +1602,12 @@ For
 
 \end_inset
 
-.
+ or random values are selected within the range.
+ The prior equally spaced ranges are referred to as 
+\emph on
+uniform
+\emph default
+ ensembles in this work to distinguish them from random ensembles.
 \end_layout
 
 \begin_layout Standard
@@ -1431,7 +1638,8 @@ disagreement
 \emph default
 , the proportion of incorrect models when correctly group classifying.
  Alongside the disagreement and ensemble test accuracy, the average individual
- accuracy for both test and training data are also presented.
+ accuracy for both test and training data for all models within the meta-classif
+iers are also presented.
 \end_layout
 
 \begin_layout Subsection
@@ -1455,13 +1663,21 @@ status open
 \end_inset
 
 
+\begin_inset Graphics
+	filename ../graphs/exp2-test8-error-rate-std.png
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ensemble classifier performance results for 
+Uniform ensemble classifier performance results for 
 \begin_inset Formula $\eta=0.03$
 \end_inset
 
@@ -1498,8 +1714,42 @@ name "fig:exp2-test8"
 \end_layout
 
 \begin_layout Standard
-An experiment with a fixed epoch value throughout the ensemble is presented
- in figure 
+An investigation into a uniform ensemble of variable nodes and epochs can
+ be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp2-test8"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The ensemble error rate varies between 16% and 18%.
+ The individual test and train error rates begin at ~17% and increase to
+ 20% as the models increase.
+ As 
+\begin_inset Formula $m$
+\end_inset
+
+ increases, the variance in individual and ensemble error rates decreases,
+ the individual rates decrease sharply while the ensemble error rate decreases
+ more gradually.
+ The disagreement increases from 
+\begin_inset Formula $m=1$
+\end_inset
+
+ to 
+\begin_inset Formula $m=9$
+\end_inset
+
+ and appears to be fairly constant beyond this.
+\end_layout
+
+\begin_layout Standard
+An experiment with a fixed epoch value throughout the uniform ensemble is
+ presented in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:exp2-test10"
@@ -1520,12 +1770,19 @@ noprefix "false"
 \end_inset
 
 .
- The ensemble accuracy can be seen to be fairly constant throughout the
- number of horizontal models with 3 models being the least accurate with
- a higher standard deviation.
+ The ensemble accuracy can be seen to be fairly constant at around 5% throughout
+ the number of horizontal models, 3 models was the least accurate with a
+ higher standard deviation.
  3 horizontal models also shows a significant spike in disagreement and
  individual error rates which gradually decreases as the number of models
  increases.
+ The ensemble accuracy was higher than the individual models, significantly
+ for 3 models (~10%) and by a single percent after 
+\begin_inset Formula $m=25$
+\end_inset
+
+.
+ The variance in ensemble accuracy decreases as the number of models increases.
 \end_layout
 
 \begin_layout Standard
@@ -1545,13 +1802,21 @@ status open
 \end_inset
 
 
+\begin_inset Graphics
+	filename ../graphs/exp2-test10-error-rate-std.png
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ensemble classifier performance results for 
+Uniform ensemble classifier performance results for 
 \begin_inset Formula $\eta=0.15$
 \end_inset
 
@@ -1578,7 +1843,106 @@ name "fig:exp2-test10"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Results for a random ensemble can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp2-test19"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The ensemble error rate can be seen to be lower than the individual values
+ with roughly a 2% improvement.
+ The ensemble error rate is also fairly constant for 
+\begin_inset Formula $m>3$
+\end_inset
+
+, for 
+\begin_inset Formula $m=3$
+\end_inset
+
+ the ensemble error rate is higher in line with the higher individual error
+ rates.
+ For 
+\begin_inset Formula $m>1$
+\end_inset
+
+, the disagreement can be seen to fairly constant at around 3%.
+ Looking to the variance, for all series the variance reduces as 
+\begin_inset Formula $m$
+\end_inset
+
+ increases.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp2-test19-error-rate-curves.png
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../graphs/exp2-test19-error-rate-std.png
+	lyxscale 50
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Random ensemble classifier performance results for 
+\begin_inset Formula $\eta=0.01-0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+, nodes = 
+\begin_inset Formula $1-100$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $10-70$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp2-test19"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -1592,23 +1956,71 @@ Discussion
 \end_layout
 
 \begin_layout Standard
-From the data of figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:exp2-test10"
-plural "false"
-caps "false"
-noprefix "false"
-
+In general, the use of an ensemble classifier slightly increased the accuracy
+ over the indivudal models used within.
+ When using a random ensemble, the accuracy for 
+\begin_inset Formula $m=1$
 \end_inset
 
-, 3 horizontal models was shown to be the worst performing configuration
- with lower ensemble accuracy and higher disagreement.
- This is likely due to larger proportion that a single model constitutes.
+ was worse than for a uniform ensemble.
+ This is because for a uniform ensemble, the parameter values were taken
+ as the mean of the provided ranges which could be expected to provide reasonabl
+e values for each.
+ With a random ensemble, an ineffective combination of parameters could
+ be selected and there are no other models in the group to balance this
+ out.
+\end_layout
+
+\begin_layout Standard
+Throughout the presented experiments, 3 horizontal models was shown to be
+ the worst-performing configuration with lower ensemble accuracy and higher
+ disagreement.
+ This is likely due to the larger proportion of the group that a single
+ model constitutes.
  When correct, three models may only have a disagreement of 1/3 or 0 and
  thus the final value will lie somewhere between these two.
  As the number of horiztonal models increases, the number of acceptable
  disagreement values increases.
+ As such a value for 
+\begin_inset Formula $m>5$
+\end_inset
+
+ allows more granularity in making ensemble decisions.
+\end_layout
+
+\begin_layout Standard
+A random ensemble would be recommended in order to broadly sample parameter
+ combinations for the provided ranges.
+ For a uniform ensemble, each model will have parameters that are selected
+ from the same point through the range which may lead to consistently ineffectiv
+e combinations depending on the selected range
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For a range of epochs from 1 to 100 and a range of hidden nodes from 1 to
+ 100, each model will have the same value for both using a uniform ensemble.
+ It can be seen that the particular ranges specified for both is more important
+ than if the values were selected randomly.
+\end_layout
+
+\end_inset
+
+.
+ When using a random ensemble it is important to use a large enough group
+ of models in order to achieve robust group classification.
+ A value for 
+\begin_inset Formula $m>10$
+\end_inset
+
+ is recommended to achieve this.
+\end_layout
+
+\begin_layout Standard
+In general, increasing the size of the ensemble did not guarantee an increase
+ in performance however it did tend to reduce the variance in accuracy.
+ This would be a desired result where robustness is valued such as the domain
+ of healthcare as is the case for this work.
 \end_layout
 
 \begin_layout Section
@@ -1624,8 +2036,8 @@ name "sec:exp3"
 
 \begin_layout Standard
 Throughout the previous experiments the stochastic gradient descent optimiser
- was used to change the networks weights but there are many different optimisati
-on algorithms.
+ was used to change weights of the networks but there are many different
+ optimisation algorithms.
  This section will present investigations into two other optimisation algorithms
  and discuss the differences between them using the horizontal ensemble
  classification of the previous section.
@@ -1664,7 +2076,7 @@ The aim of the neural networks in question are to make correct classifications
 \begin_inset Formula $J$
 \end_inset
 
-, is defined as the difference between the predicted ouput and the target
+, is defined as the difference between the predicted output and the target
  labelled output
 \begin_inset Foot
 status open
@@ -1792,7 +2204,7 @@ ion algorithm.
 \noun on
 Tensorflow's
 \noun default
- implementation of SGD also includses a momentum parameter.
+ implementation of SGD also includes a momentum parameter.
  Momentum aims to help a network increase the speed of convergence and reduce
  oscillations by reinforcing dimensions (weights) that are changing in a
  consistent direction while slowing dimensions that are changing direction
@@ -2202,7 +2614,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/andy/dev/py/shallow-training/graphs/exp3-test1-error-rate-curves.png
+	filename ../graphs/exp3-test1-error-rate-curves.png
 	lyxscale 30
 	width 100col%
 
@@ -2215,8 +2627,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ensemble classifier performance results for SGD, RMSprop and Adam optimisation
- with 
+Uniform ensemble classifier performance results for SGD, RMSprop and Adam
+ optimisation with 
 \begin_inset Formula $\eta=0.1$
 \end_inset
 
@@ -2249,6 +2661,70 @@ name "fig:exp3-test1"
 \end_layout
 
 \begin_layout Standard
+A uniform ensemble classifier of fixed 
+\begin_inset Formula $\eta$
+\end_inset
+
+, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{h}$
+\end_inset
+
+ was evaluated, the results can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp3-test1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Across the values of 
+\begin_inset Formula $m$
+\end_inset
+
+ and the three evaluated optimisers, the ensemble error rates did not change
+ significantly with ~1% difference throughout.
+ The individual error rates and disagreement was more varied, Adam and RMSprop
+ reported ~10% lower errors for 
+\begin_inset Formula $m>5$
+\end_inset
+
+.
+ The previously described spike in individual error rates and disagreement
+ for 
+\begin_inset Formula $m=3$
+\end_inset
+
+ can be seen.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp3-test1-std"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the variance in these results.
+ The Adam optimiser showed significantly higher variance for individual
+ test error and disagreement while the SGD algorithm showed the lowest variance
+ throughout.
+ RMSprop demonstrated a higher initial variance for disagreement than SGD
+ and then comparable results for 
+\begin_inset Formula $m>3$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2258,7 +2734,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/andy/dev/py/shallow-training/graphs/exp3-test7-error-rate-curves.png
+	filename ../graphs/exp3-test1-errors-rate-std.png
 	lyxscale 30
 	width 100col%
 
@@ -2271,8 +2747,68 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Ensemble classifier performance results for SGD, RMSprop and Adam optimisation
+Uniform ensemble classifier test variance for SGD, RMSprop and Adam optimisation
  with 
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+, nodes = 16, epochs = 
+\begin_inset Formula $1-100$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test1-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp3-test7-error-rate-curves.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uniform ensemble classifier performance results for SGD, RMSprop and Adam
+ optimisation with 
 \begin_inset Formula $\eta=0.1$
 \end_inset
 
@@ -2308,22 +2844,307 @@ name "fig:exp3-test7"
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp3-test7-errors-rate-std.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uniform ensemble classifier test variance for SGD, RMSprop and Adam optimisation
+ with 
+\begin_inset Formula $\eta=0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.9$
+\end_inset
+
+, nodes = 
+\begin_inset Formula $1-400$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $50-100$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test7-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The effect of including random parameter selection from a range of learning
+ rates, hidden nodes and epochs was evaluated, the results can be seen in
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp3-test9"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Similar to the previously presented random ensemble, the ensemble error
+ rate is higher for 
+\begin_inset Formula $m=1$
+\end_inset
+
+.
+ Past this, the ensemble accuracy is fairly constant throughout the range
+ for 
+\begin_inset Formula $m$
+\end_inset
+
+ over the three optimisers at ~4%.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:exp3-test9-std"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the variance in these results, RMSprop demonstrated the lowest
+ standard deviation throughout the range of 
+\begin_inset Formula $m$
+\end_inset
+
+ for all series.
+ SGD and Adam showed a higher variance for 
+\begin_inset Formula $m\leq5$
+\end_inset
+
+ before descending to similar values as RMSprop.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp3-test9-error-rate-curves.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Random ensemble classifier performance results for SGD, RMSprop and Adam
+ optimisation with 
+\begin_inset Formula $\eta=0.01-0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+, nodes = 
+\begin_inset Formula $1-100$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $1-70$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../graphs/exp3-test9-errors-rate-std.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Random ensemble classifier test variance for SGD, RMSprop and Adam optimisation
+ with 
+\begin_inset Formula $\eta=0.01-0.1$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=0.0$
+\end_inset
+
+, nodes = 
+\begin_inset Formula $1-100$
+\end_inset
+
+, epochs = 
+\begin_inset Formula $1-70$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:exp3-test9-std"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Discussion
+\end_layout
+
+\begin_layout Standard
+The similarity in group classification despite variations in individual
+ error rates across the employed algorithms suggests that the use of a meta-clas
+sifer was able to largely overcome the differences in training regimens.
+ Similarly to the previous discussion, a larger ensemble reduced the variation
+ in results, providing a more robust classification.
 \end_layout
 
 \begin_layout Standard
 In suggesting a optimal algorithm it is worth considering the intended domains
  for RMSprop and Adam.
  As newer algorithms, there tends to a focus on deep convolutional networks
- which implies a somewhat different set of requirements.
+ which implies a somewhat different set of requirements such as being able
+ to scale to large numbers of parameters.
  This is not to say that the algorithms are inappropriate for the presented
  applications, as demonstrated, these more complex algorithms were able
  to outperform the employed gradient descent with optional momentum.
+ 
+\end_layout
+
+\begin_layout Standard
+As the ensemble accuracies throughout the ensemble sizes and algorithms
+ were comparable, a recommendation for an algorithm can instead be made
+ primarily on the robustness of the meta-classifier, an important factor
+ in the subject field of healthcare.
+ RMSprop showed the lowest disagreement in the group and the tightest variation
+ in results, for this reason it is recommended based on this presented data.
+ Although a random ensemble has previously been recommended with the caveat
+ of using a larger ensemble, RMSprop showed lower variation throughout the
+ smaller group sizes where Adam showed similar variance to SGD.
 \end_layout
 
 \begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Standard
+Within this work, shallow multi-layer perceptrons were shown to be able
+ to achieve an error rate of 4% when classifying breast tumours as either
+ benign or malignant.
+ Investigations were made into how the number of hidden nodes and the length
+ of the training period affected the performance.
+ In general, increasing the number of nodes increased the speed of convergence
+ while training the network for longer also increased performance.
+ A learning rate of 0.5 allowed all of the evaluated network architectures
+ to train within 40 epochs.
+\end_layout
+
+\begin_layout Standard
+The effect of creating an ensemble meta-classifier on performance was evaluated
+ to investigate whether combining models could produce a lower error rate.
+ While the ensemble accuracy was not significantly affected, the variance
+ of the results was reduced indicating that the robustness was increased
+ when classifying in conjunction.
+\end_layout
+
+\begin_layout Standard
+Two additional optimisation algorithms were evaluated, RMSprop and Adam.
+ The ensemble accuracy was not significantly affected, although RMSprop
+ and Adam reported lower individual test and train error rates, the ensemble
+ accuracy was not significantly affected.
+ As such, a recommendation for RMSprop was made as it reported tighter variance.
+ For the healthcare domain, a more robust network was prioritised.
 \end_layout
 
 \begin_layout Standard
@@ -2596,28 +3417,6 @@ name "tab:trainable-params"
 \end_layout
 
 \begin_layout Section
-Source Code
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Source-Code"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand lstinputlisting
-filename "../nncw.py"
-lstparams "caption={Formatted Jupyter notebook containing experiment code},label={notebook-code}"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
 Network Graph
 \begin_inset CommandInset label
 LatexCommand label
@@ -2670,6 +3469,28 @@ name "fig:tensorboard"
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Source Code
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Source-Code"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "../nncw.py"
+lstparams "caption={Formatted Jupyter notebook containing experiment code},label={notebook-code}"
 
 \end_inset
 
