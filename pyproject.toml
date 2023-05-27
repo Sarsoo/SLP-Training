@@ -5,13 +5,13 @@ description = ""
 authors = ["andy <andy@sarsoo.xyz>"]
 
 [tool.poetry.dependencies]
-python = "~3.8"
-tensorflow = "^2.4.1"
-pandas = "^1.2.4"
-matplotlib = "^3.4.1"
-seaborn = "^0.11.1"
-scikit-learn = "^0.24.1"
-jupyterlab = "^3.0.14"
+python = "~3.11"
+tensorflow-macos = "^2.4.1"
+pandas = "^2.0.1"
+matplotlib = "^3.7.1"
+seaborn = "^0.12.2"
+scikit-learn = "^1.2.2"
+jupyterlab = "^4.0.0"
 
 [tool.poetry.dev-dependencies]
 
