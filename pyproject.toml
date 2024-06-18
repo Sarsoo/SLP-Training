@@ -10,7 +10,7 @@ tensorflow-macos = "^2.4.1"
 pandas = "^2.0.1"
 matplotlib = "^3.7.1"
 seaborn = "^0.12.2"
-scikit-learn = "^1.2.2"
+scikit-learn = "^1.5.0"
 jupyterlab = "^4.0.0"
 
 [tool.poetry.dev-dependencies]
